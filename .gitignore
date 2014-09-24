@@ -1,0 +1,19 @@
+/target
+
+*.bak
+*.class
+*.tmp
+*.log
+/bin
+build.sh
+integration-repo
+build
+
+# IDEA metadata and output dirs
+*.iml
+*.ipr
+*.iws
+*.idea
+out
+*.db
+.svn
