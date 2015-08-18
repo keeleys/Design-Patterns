@@ -10,38 +10,45 @@ package 创建型.建造者模式;
 public class Client {
     public static void main(String []args){
         Director dir = new Director();
-        dir.getProduct1().showProduct();
-        dir.getProduct2().showProduct();
+        dir.setBuilder(new BuildBaidu());
+        dir.build().showProduct();
     }
 }
+//一个指挥官 选择用什么人当创建者
 class Director {
-    private AbsBuild build = new Build();
-    public Product getProduct1(){
-        build.setProd("tianjun",15);
-        return build.getProduct();
+    private Build build;
+    //这里跟建造者是一样的方法，但是假如要返回一组对象 这里就有用了。
+    public Product build(){
+        return build.build();
     }
-    public Product getProduct2(){
-        build.setProd("zhangxia",20);
-        return build.getProduct();
+    public void setBuilder(Build build){
+        this.build = build;
     }
 }
 
-
-abstract class AbsBuild {
-    public abstract void setProd(String name,int num);
-    public abstract Product getProduct();
+//抽象创造者对象 有一个创建对象方法
+abstract class Build {
+    /**
+    创建一组固定参数的 复杂的对象，这时候可以系统内部自己创建了，不用用户自己一个个赋值。
+     */
+    public abstract Product build();
 }
-class Build extends AbsBuild {
-    Product product = new Product();
-    @Override
-    public void setProd(String name, int num) {
-        //To change body of implemented methods use File | Settings | File Templates.
-        product.setName(name);
-        product.setNum(num);
-    }
 
+class BuildBaidu extends Build {
     @Override
-    public Product getProduct() {
+    public Product build() {
+        Product product = new Product();
+        product.setName("Baidu");
+        product.setNum(10);
+        return product;
+    }
+}
+class BuildGoogle extends Build {
+    @Override
+    public Product build() {
+        Product product = new Product();
+        product.setName("google");
+        product.setNum(8);
         return product;
     }
 }

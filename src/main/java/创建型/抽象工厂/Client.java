@@ -12,6 +12,10 @@ public class Client {
         Factory factory = new FactoryA();
         factory.createDrink().drink();
         factory.createFood().eat();
+
+        factory =  new FactoryB();
+        factory.createDrink().drink();
+        factory.createFood().eat();
     }
 }
 
@@ -21,15 +25,31 @@ interface Food{
 interface Drink{
     public void drink();
 }
-class Bread implements Food{
+//一个吃的实现例子，
+class BreadA implements Food{
     public void eat(){
         System.out.println("吃面包");
     }
 }
-class Juice implements Drink{
+//一个喝的实现例子，
+class JuiceA implements Drink{
     @Override
     public void drink() {
-        System.out.println("喝果汁");
+        System.out.println("喝牛奶");
+    }
+}
+
+//一个吃的实现例子，
+class BreadB implements Food{
+    public void eat(){
+        System.out.println("吃油条");
+    }
+}
+//一个喝的实现例子，
+class JuiceB implements Drink{
+    @Override
+    public void drink() {
+        System.out.println("喝豆浆");
     }
 }
 interface Factory{
@@ -37,16 +57,30 @@ interface Factory{
     Food createFood();
     Drink createDrink();
 }
+//早餐工厂A
 class FactoryA implements Factory{
 
     @Override
     public Food createFood() {
-        return new Bread();
+        return new BreadA();
     }
 
     @Override
     public Drink createDrink() {
-        return new Juice();
+        return new JuiceA();
     }
 }
 
+//早餐工厂B
+class FactoryB implements Factory{
+
+    @Override
+    public Food createFood() {
+        return new BreadB();
+    }
+
+    @Override
+    public Drink createDrink() {
+        return new JuiceB();
+    }
+}
