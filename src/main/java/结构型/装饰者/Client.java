@@ -9,7 +9,9 @@ package 结构型.装饰者;
  */
 public class Client {
     public static void main(String[]args){
-        new AniminPro(new AnimiImpl()).say();
+        AniminPro animi = new AniminPro(new AnimiImpl());
+        animi.say();
+        animi.eat();
     }
 }
 
@@ -39,9 +41,8 @@ class AniminPro extends AnimiDecorator {
     public AniminPro(Animi animi) {
         super(animi);
     }
-    @Override
-    public void say() {
-        System.out.println("pro say");
+    public void eat() {
+        System.out.println("animi eat");
     }
 }
 
